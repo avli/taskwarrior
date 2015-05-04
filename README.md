@@ -1,2 +1,6 @@
 # taskwarrior-mode
-Taskwarrior mode for Emacs
+
+My first attempt to write Emacs mode.
+
+To learn more about Taskwarrior visit the [project page](Taskwarrior
+mode for Emacs).
