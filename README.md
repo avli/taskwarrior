@@ -1,4 +1,4 @@
-# taskwarrior-mode
+# taskwarrior
 
 My first attempt to write Emacs mode.
 
