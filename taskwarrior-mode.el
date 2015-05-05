@@ -42,7 +42,8 @@
 
 (defun add-task (task-description)
   (interactive "sTask description: ")
-  (shell-command (format "task add %s" task-description)))
+  (shell-command (format "task add %s" task-description))
+  (display-tasks))
 
 (defun filter-spaces (seq)
   "Filter spaces from seq of strings"
@@ -62,7 +63,8 @@
   (interactive)
   (let ((current-line (thing-at-point 'line)))
     (let ((task-number (get-task-number current-line)))
-      (shell-command (format "task %i done" (string-to-number task-number))))))
+      (shell-command (format "task %i done" (string-to-number task-number)))))
+  (display-tasks))
 
 (define-minor-mode taskwarrior-mode
   "Taskwarrior mode."
