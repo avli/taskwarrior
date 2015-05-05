@@ -64,17 +64,17 @@
 
 (defun delete-task ()
   (interactive)
-  (let ((current-line (thing-at-point 'line)))
-    (let ((task-number (get-task-number current-line)))
-      (message (format "task %i delete" (string-to-number task-number))))))
+  (let* ((current-line (thing-at-point 'line))
+         (task-number (get-task-number current-line)))
+      (message (format "task %i delete" (string-to-number task-number)))))
 
 (defun taskwarrior-done-task ()
   "Mark taskwarrior task as done."
   (interactive)
-  (let ((current-line (thing-at-point 'line)))
-    (let ((task-number (get-task-number current-line)))
-      (shell-command (format "task %i done" (string-to-number task-number)))))
-  (display-tasks))
+  (let* ((current-line (thing-at-point 'line))
+         (task-number (get-task-number current-line)))
+    (shell-command (format "task %i done" (string-to-number task-number)))
+  (display-tasks)))
 
 (defun taskwarrior ()
   "The entry point for taskwarrior client."
