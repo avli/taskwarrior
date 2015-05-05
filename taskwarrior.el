@@ -1,4 +1,4 @@
-;;; taskwarrior-mode.el --- Taskwarrior client for Emacs
+;;; taskwarrior.el --- Taskwarrior client for Emacs
 
 ;; Copyright (C) 2015  Andrey Lisin <andrey.lisin@gmail.com>
 
