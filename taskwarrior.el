@@ -89,5 +89,5 @@
             ((kbd "a") . add-task)
             ((kbd "d") . done-task)))
 
-(provide 'taskwarrior-mode)
-;;; taskwarrior-mode.el ends here
+(provide 'taskwarrior)
+;;; taskwarrior.el ends here
