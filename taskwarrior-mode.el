@@ -58,11 +58,17 @@
     (let ((task-number (get-task-number current-line)))
       (message (format "task %i delete" (string-to-number task-number))))))
 
+(defun done-task ()
+  (interactive)
+  (let ((current-line (thing-at-point 'line)))
+    (let ((task-number (get-task-number current-line)))
+      (shell-command (format "task %i done" (string-to-number task-number))))))
+
 (define-minor-mode taskwarrior-mode
   "Taskwarrior mode."
   :keymap '(((kbd "g") . display-tasks)
             ((kbd "a") . add-task)
-            ((kbd "d") . delete-task)))
+            ((kbd "d") . done-task)))
 
 (provide 'taskwarrior-mode)
 ;;; taskwarrior-mode.el ends here
