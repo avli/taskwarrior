@@ -60,7 +60,7 @@
 
 (defun get-task-number (line)
   (let ((tokens (split-string line)))
-    (nth 0 (filter-spaces tokens))))
+    (string-to-number (nth 0 (filter-spaces tokens)))))
 
 (defun delete-task ()
   (interactive)
@@ -73,8 +73,9 @@
   (interactive)
   (let* ((current-line (thing-at-point 'line))
          (task-number (get-task-number current-line)))
-    (shell-command (format "task %i done" (string-to-number task-number)))
-  (display-tasks)))
+    (if (/= 0 task-number)
+        (shell-command (format "task %i done" task-number)))
+    (display-tasks)))
 
 (defun taskwarrior ()
   "The entry point for taskwarrior client."
