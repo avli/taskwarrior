@@ -33,7 +33,7 @@
   "Name of the taskwarrior buffer.")
 
 (defvar taskwarrior-map (make-sparse-keymap)
-  "The keymap to use with taskwarrior")
+  "The keymap to use with taskwarrior.")
 
 (if taskwarrior-map
     (progn
@@ -55,7 +55,7 @@
   (display-tasks))
 
 (defun filter-spaces (seq)
-  "Filter spaces from seq of strings"
+  "Filter spaces from seq of strings."
   (delq nil (mapcar (lambda (x) (if (string-equal x " ") nil x)) seq)))
 
 (defun get-task-number (line)
