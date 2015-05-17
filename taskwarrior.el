@@ -39,7 +39,8 @@
     (progn
       (define-key taskwarrior-map (kbd "g") 'taskwarrior)
       (define-key taskwarrior-map (kbd "a") 'taskwarrior-add-task)
-      (define-key taskwarrior-map (kbd "d") 'taskwarrior-done-task)))
+      (define-key taskwarrior-map (kbd "d") 'taskwarrior-done-task)
+      (define-key taskwarrior-map (kbd "i") 'taskwarrior-task-info)))
 
 (defun display-tasks ()
   (let ((shell-output (shell-command-to-string "task"))
@@ -60,7 +61,7 @@
 
 (defun get-task-number (line)
   (let ((tokens (split-string line)))
-    (nth 0 (filter-spaces tokens))))
+    (string-to-number (nth 0 (filter-spaces tokens)))))
 
 (defun delete-task ()
   (interactive)
@@ -73,8 +74,17 @@
   (interactive)
   (let* ((current-line (thing-at-point 'line))
          (task-number (get-task-number current-line)))
-    (shell-command (format "task %i done" (string-to-number task-number)))
-  (display-tasks)))
+    (if (/= 0 task-number)
+        (shell-command (format "task %i done" task-number)))
+    (display-tasks)))
+
+(defun taskwarrior-task-info ()
+  "Show task detailed information."
+  (interactive)
+  (let* ((current-line (thing-at-point 'line))
+         (task-number (get-task-number current-line)))
+    (if (/= 0 task-number)
+        (with-output-to-temp-buffer (shell-command (format "task %i info" task-number))))))
 
 (defun taskwarrior ()
   "The entry point for taskwarrior client."
@@ -82,12 +92,6 @@
   (display-tasks)
   (use-local-map taskwarrior-map)
   )
-
-(define-minor-mode taskwarrior-mode
-  "Taskwarrior mode."
-  :keymap '(((kbd "g") . display-tasks)
-            ((kbd "a") . add-task)
-            ((kbd "d") . done-task)))
 
 (provide 'taskwarrior)
 ;;; taskwarrior.el ends here
